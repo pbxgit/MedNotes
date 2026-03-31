@@ -21,7 +21,8 @@ jobs:
       - name: Install dependencies
         run: |
           rm -rf node_modules package-lock.json
-          npm install
+          npm install --verbose
+          npm rebuild
 
       - name: Build app
         run: npm run build
