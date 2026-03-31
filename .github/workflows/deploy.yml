@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      TAILWIND_DISABLE_OXIDE: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -16,13 +19,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install --verbose
-          npm rebuild
+        run: npm ci
 
       - name: Build app
         run: npm run build
